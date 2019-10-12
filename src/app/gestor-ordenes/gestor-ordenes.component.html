@@ -1,0 +1,101 @@
+<div class="row centrar-contenido">
+  <div class="col-8">
+    <div class="form-group">
+      <label for="orden">Numero Orden</label>
+      <input type="text" [(ngModel)]="numero_orden" class="form-control" id="orden" aria-describedby="emailHelp" placeholder="Numero Orden">
+      <small id="ordenayuda" class="form-text text-muted">Ingresa el numero de la Orden.</small>
+    </div>
+  </div>
+  <div class="col-1">
+    <button class="btn btn-primary" (click)="demo(true)" style="margin-top:25px;">Buscar</button>
+  </div>
+  <div class="col-1">
+     <button class="btn btn-primary" (click)="RegistrarOrden(true)" style="margin-top:25px;">Registrar Orden</button>
+  </div>
+</div>
+<div class="row centrar-contenido" *ngIf="orden&&!isRegistro">
+    <div class="col-8">
+           <div class="row">
+             <div class="col-8">
+                <div class="form-group">
+                    <label for="Laboratorio">Codigo de Laboratorio</label>
+                    <input type="text" [(ngModel)]="numero_laboratorio" class="form-control" id="Laboratorio" aria-describedby="emailHelp" placeholder="Numero Laboratorio">
+                    <small id="Laboratorioayuda" class="form-text text-muted">Busca el laboratorio para añadir a la orden.</small>
+                  </div>
+             </div>
+             <div class="col-4">
+                <button class="btn btn-primary" (click)="buscar(true)">+</button>
+             </div>
+           </div>
+          <div class="row">
+             <div class="col-4">
+               Identificación: {{orden.paciente.identificacion}}
+             </div>
+             <div class="col-8">
+               {{orden.paciente.nombre}} {{orden.paciente.apellido}}
+             </div>
+          </div>
+          <div class="row" *ngFor="let i of orden.list_examen;let in=index;">
+              <div class="col-4">
+                Cups:{{i.codigo_examen}}
+              </div>
+              <div class="col-4">
+                Examen: {{i.nombre}}
+              </div>
+              <div class="col-4">
+                <button class=" btn-danger" (click)="Eliminar(true,in)">-</button>
+              </div>
+          </div>
+    </div>
+</div>
+<div class="row centrar-contenido" *ngIf="isRegistro">
+    <div class="col-8">
+           <div class="row">
+             <div class="col-8">
+                <div class="form-group">
+                    <label for="Laboratorio">Codigo de Laboratorio</label>
+                    <input type="text" [(ngModel)]="numero_laboratorio" class="form-control" id="Laboratorio" aria-describedby="emailHelp" placeholder="Numero Laboratorio">
+                    <small id="Laboratorioayuda" class="form-text text-muted">Busca el laboratorio para añadir a la orden.</small>
+                  </div>
+             </div>
+             <div class="col-4">
+                <button class="btn btn-primary" (click)="buscar(true)">+</button>
+             </div>
+           </div>
+          <div class="row" *ngIf="!orden.paciente">
+             <div class="col-8" >
+                <div class="form-group">
+                    <label for="identificacion">Numero de identificacion</label>
+                    <input type="number" [(ngModel)]="identificacion" class="form-control" id="identificacion" aria-describedby="emailHelp" placeholder="Numero identificacion">
+                    <small id="identificacionayuda" class="form-text text-muted">Busca el identificacion a la persona para registrar en la orden.</small>
+                  </div>
+             </div>
+       
+             <div class="col-4">
+                  <button style="margin-top:25px;" class="btn btn-primary" (click)="BuscarPersona(true)">Buscar</button>
+             </div>
+          </div>
+          <div class="row" *ngIf="orden.paciente">
+              <div class="col-4">
+                Identificación: {{orden.paciente.identificacion}}
+              </div>
+              <div class="col-8">
+                {{orden.paciente.nombre}} {{orden.paciente.apellido}}
+              </div>
+           </div>
+          <div class="row" *ngFor="let i of orden.list_examen;let in=index;">
+              <div class="col-4">
+                Cups:{{i.codigo_examen}}
+              </div>
+              <div class="col-4">
+                Examen: {{i.nombre}}
+              </div>
+              <div class="col-4">
+                <button class=" btn-danger" (click)="Eliminar(true,in)">-</button>
+              </div>
+          </div>
+          <div class="row centrar-contenido">
+            <button class="btn btn-primary">Registrar</button>
+          </div>
+    </div>
+</div>
